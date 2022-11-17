@@ -2,20 +2,25 @@ import sqlite3
 from flask import g, current_app
 
 
+def fetch_top_sellers_by_year(year: int):
+    cursor = get_db().cursor()
+
+    cursor.execute("SELECT Employee.FirstName || ' ' || Employee.LastName, SUM(Invoice.Total)"
+                   "FROM Invoice INNER JOIN Customer "
+                   "ON Customer.CustomerId = Invoice.CustomerId "
+                   "INNER JOIN Employee "
+                   "ON Employee.EmployeeId = Customer.SupportRepId "
+                   "WHERE strftime('%Y', InvoiceDate) = ? "
+                   "GROUP BY Employee.EmployeeId "
+                   "ORDER BY SUM(Invoice.Total) DESC", (year,))
+
+    rows = cursor.fetchall()
+    return rows
+
+
 def fetch_top_sellers():
-    cur = get_db().cursor()
-    cur.execute("SELECT * FROM Genre")
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
-
-
-def fetch_top_sellers_by_year():
-    cur = get_db().cursor()
-    cur.execute("SELECT * FROM Genre")
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
+    sql_statement = "SELECT * FROM Genre"
+    return []
 
 
 # Make sure we close the connection when the request ends
