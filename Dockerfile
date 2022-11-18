@@ -8,7 +8,6 @@ COPY poetry.lock pyproject.toml ./
 WORKDIR app
 COPY . .
 RUN poetry install
-EXPOSE 5000
 RUN chmod 755 ./run.sh
 RUN chmod +x ./run.sh
 ENTRYPOINT ["./run.sh"]
