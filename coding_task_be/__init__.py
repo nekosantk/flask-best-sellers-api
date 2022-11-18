@@ -1,5 +1,3 @@
-__version__ = "v0.0.1"
-
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
