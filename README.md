@@ -1,4 +1,10 @@
 # Coding Task BE: Top Sellers
+```
+Service that has 2 endpoints for fetching the top sales people overall and for a specific year.
+
+http://{container_ip}:5000/api/v1/sellers/top
+http://{container_ip}:5000/api/v1/sellers/{year}/top
+```
 # Docker (Normal)
 ```
 docker pull nekosantk/coding_task_be:latest
