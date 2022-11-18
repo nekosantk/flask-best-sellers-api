@@ -1,11 +1,11 @@
 version: "3.8"
 
 services:
-  todo-flaskapp:
-    image: coolboi567/todo-flaskapp:${DOCKER_TAG:-latest}
+  backend_task_be:
+    image: nekosantk/backend_task_be:v0.0.1
     ports:
       - 5000:5000
-    container_name: flask-app
+    container_name: backend_task_be
     environment:
       - FLASK_ENV=development
       - PORT=5000
