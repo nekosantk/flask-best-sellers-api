@@ -1,12 +1,13 @@
 # Coding Task BE: Top Sellers
 # Docker (Normal)
 ```
-docker pull nekosantk/backend_task_be:latest
-docker run nekosantk/backend_task_be:latest
+docker pull nekosantk/coding_task_be:latest
+docker run nekosantk/coding_task_be:latest
 ```
 # Docker (Tests)
 ```
-docker run coding_task_be test
+docker pull nekosantk/coding_task_be:lates
+docker run nekosantk/coding_task_be:latest test
 ```
 # Installation
 ```
