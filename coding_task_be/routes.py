@@ -1,6 +1,4 @@
 from flask import current_app as app
-from . import db
-from decimal import *
 from werkzeug.exceptions import HTTPException
 import json
 from flask import abort
