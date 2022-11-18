@@ -2,33 +2,32 @@ import sqlite3
 from flask import g, current_app
 
 
+# Grab top seller by a specific year
 def fetch_top_sellers_by_year(year: int):
-    cursor = get_db().cursor()
 
-    cursor.execute("SELECT Employee.FirstName || ' ' || Employee.LastName, SUM(Invoice.Total)"
-                   "FROM Invoice INNER JOIN Customer "
-                   "ON Customer.CustomerId = Invoice.CustomerId "
-                   "INNER JOIN Employee "
-                   "ON Employee.EmployeeId = Customer.SupportRepId "
-                   "WHERE strftime('%Y', InvoiceDate) = ? "
-                   "GROUP BY Employee.EmployeeId "
-                   "ORDER BY SUM(Invoice.Total) DESC", (year,))
+    cursor = get_db().cursor()
+    cursor.execute("SELECT * FROM vw_top_sellers WHERE DateYear = ?", (year,))
 
     rows = cursor.fetchall()
     return rows
 
 
+# Grab top sellers and order by year
 def fetch_top_sellers():
-    sql_statement = "SELECT * FROM Genre"
-    return []
+    cursor = get_db().cursor()
+    cursor.execute("SELECT * from vw_top_sellers ORDER BY DateYear DESC")
+    rows = cursor.fetchall()
+    return rows
 
 
-# Make sure we close the connection when the request ends
+# Initialize DB
 def init_app(app):
+
+    # Close the connection on request end
     app.teardown_appcontext(close_db)
 
 
-# Get fresh connection for every request
+# Get connection for new request
 def get_db():
     if 'db' not in g:
         g.db = sqlite3.connect(
