@@ -4,13 +4,14 @@ from decimal import *
 from werkzeug.exceptions import HTTPException
 import json
 from flask import abort
+from .models import vw_top_sellers
 
 
 @app.get("/api/v1/sellers/top")
 def top_sellers():
 
     # Fetch raw rows from database
-    rows = db.fetch_top_sellers()
+    rows = vw_top_sellers.query.all()
 
     # Invalid year check
     if len(rows) == 0:
@@ -20,11 +21,10 @@ def top_sellers():
 
     # Format rows into json
     for row in rows:
-        print(row)
         results.append({
-            "Sales Rep": row[0],
-            "Total Sales": round(Decimal(row[1]), 2),
-            "Year": int(row[2])
+            "Sales Rep": row.sales_rep,
+            "Total Sales": row.total_sales,
+            "Year": row.year
         })
 
     return results
@@ -34,22 +34,17 @@ def top_sellers():
 def top_sellers_by_year(year):
 
     # Fetch raw rows from database
-    rows = db.fetch_top_sellers_by_year(year)
+    row = vw_top_sellers.query.filter_by(year=year).first()
 
     # Invalid year check
-    if len(rows) == 0:
+    if row is None:
         abort(400, description="No data for year")
 
-    results = []
-
-    # Format rows into json
-    for row in rows:
-        results.append({
-            "Sales Rep": row[0],
-            "Total Sales": round(Decimal(row[1]), 2)
-        })
-
-    return results
+    return {
+            "Sales Rep": row.sales_rep,
+            "Total Sales": row.total_sales,
+            "Year": row.year
+        }
 
 
 # Return JSON errors instead of HTML

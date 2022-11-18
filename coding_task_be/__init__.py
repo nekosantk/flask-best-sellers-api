@@ -1,14 +1,13 @@
 import os
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__, instance_relative_config=True)
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(app.instance_path, 'data.db')
+db = SQLAlchemy(app)
 
 
 def create_app():
-
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-        DATABASE=os.path.join(app.instance_path, 'data.db'),
-    )
-
     try:
         os.makedirs(app.instance_path)
     except OSError:
@@ -18,7 +17,13 @@ def create_app():
 
         from . import routes
 
-        from . import db
-        db.init_app(app)
+        create_db_tables()
 
         return app
+
+
+def create_db_tables():
+    with app.open_resource("schema.sql") as f:
+        commands = f.read().decode("utf8").split(";")
+        for command in commands:
+            db.engine.execute(command)
