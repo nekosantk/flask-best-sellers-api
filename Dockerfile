@@ -7,7 +7,9 @@ RUN poetry --version
 COPY poetry.lock pyproject.toml ./
 WORKDIR app
 COPY . .
-ENV role=dev
 RUN poetry install
 EXPOSE 5000
-CMD [ "poetry", "run", "python", "-m", "flask", "run", "--host=0.0.0.0" ]
+RUN chmod 755 ./run.sh
+RUN chmod +x ./run.sh
+ENTRYPOINT ["./run.sh"]
+CMD [""]

@@ -2,12 +2,12 @@ version: "3.8"
 
 services:
   backend_task_be:
-    image: nekosantk/backend_task_be:v0.0.1
+    image: nekosantk/backend_task_be:latest
     ports:
       - 5000:5000
     container_name: backend_task_be
     environment:
-      - FLASK_ENV=development
+      - FLASK_DEBUG=false
       - PORT=5000
 
 volumes:

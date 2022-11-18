@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "coding_task_be"
-version = "v0.0.1"
+version = "v1.0.0"
 description = "Coding Task BE"
 authors = ["Mark"]
 
