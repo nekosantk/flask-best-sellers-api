@@ -1,0 +1,27 @@
+[
+    {
+        "Sales Rep": "Steve Johnson",
+        "Total Sales": "164.34",
+        "Year": 2009
+    },
+    {
+        "Sales Rep": "Jane Peacock",
+        "Total Sales": "221.92",
+        "Year": 2010
+    },
+    {
+        "Sales Rep": "Jane Peacock",
+        "Total Sales": "184.34",
+        "Year": 2011
+    },
+    {
+        "Sales Rep": "Margaret Park",
+        "Total Sales": "197.20",
+        "Year": 2012
+    },
+    {
+        "Sales Rep": "Margaret Park",
+        "Total Sales": "168.30",
+        "Year": 2013
+    }
+]
