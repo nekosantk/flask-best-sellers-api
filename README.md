@@ -12,7 +12,7 @@ docker run nekosantk/coding_task_be:latest
 ```
 # Docker (Tests)
 ```
-docker pull nekosantk/coding_task_be:lates
+docker pull nekosantk/coding_task_be:latest
 docker run nekosantk/coding_task_be:latest test
 ```
 # Installation
